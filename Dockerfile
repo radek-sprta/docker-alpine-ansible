@@ -1,13 +1,13 @@
-FROM alpine:latest
-MAINTAINER Radek Sprta <mail@radeksprta.eu>
+FROM alpine:3
 
-LABEL org.opencontainers.image.authors "Radek Sprta <mail@radeksprta.eu>"
-LABEL org.opencontainers.image.description "Alpine container for Ansible playbook and role testing in Molecule."
-LABEL org.opencontainers.image.documentation "https://radek-sprta.gitlab.io/docker-alpine-ansible"
-LABEL org.opencontainers.image.licenses "GPL-3.0"
-LABEL org.opencontainers.image.source "https://gitlab.com/radek-sprta/docker-alpine-ansible"
-LABEL org.opencontainers.image.title "rsprta/alpine-ansible"
-LABEL org.opencontainers.image.url "https://gitlab.com/radek-sprta/docker-alpine-ansible"
+LABEL maintainer="Radek Sprta <mail@radeksprta.eu>"
+LABEL org.opencontainers.image.authors="Radek Sprta <mail@radeksprta.eu>"
+LABEL org.opencontainers.image.description="Alpine container for Ansible playbook and role testing in Molecule."
+LABEL org.opencontainers.image.documentation="https://radek-sprta.gitlab.io/docker-alpine-ansible"
+LABEL org.opencontainers.image.licenses="GPL-3.0"
+LABEL org.opencontainers.image.source="https://gitlab.com/radek-sprta/docker-alpine-ansible"
+LABEL org.opencontainers.image.title="rsprta/alpine-ansible"
+LABEL org.opencontainers.image.url="https://gitlab.com/radek-sprta/docker-alpine-ansible"
 
 ENV pip_packages "ansible cryptography"
 
@@ -30,7 +30,7 @@ RUN apk --update add --virtual .build-dependencies \
        python3-dev \
     && pip3 install $pip_packages \
     && apk del .build-dependencies \
-    && rm -Rf /var/cache/apk/* 
+    && rm -Rf /var/cache/apk/*
 
 # Remove useless services
 RUN rm -f \
