@@ -32,6 +32,15 @@ RUN apk --update add --virtual .build-dependencies \
     && apk del .build-dependencies \
     && rm -Rf /var/cache/apk/* 
 
+# Remove useless services
+RUN rm -f \
+	   /etc/init.d/hwdrivers \
+       /etc/init.d/hwclock \
+       /etc/init.d/hwdrivers \
+       /etc/init.d/modloop \
+       /etc/init.d/modules \
+       /etc/init.d/modules-load
+
 # Install Ansible inventory file.
 RUN mkdir -p /etc/ansible \
     && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
