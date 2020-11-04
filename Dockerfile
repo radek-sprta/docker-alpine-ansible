@@ -14,6 +14,7 @@ ENV pip_packages "ansible cryptography"
 # Install dependencies.
 RUN apk --no-cache add \
        gzip \
+       openrc \
        python3 \
        sudo \
        tar \
@@ -25,8 +26,8 @@ RUN apk --update add --virtual .build-dependencies \
        build-base \
        libffi-dev \
        openssl-dev \
-       python3-dev \
        py3-pip \
+       python3-dev \
     && pip3 install $pip_packages \
     && apk del .build-dependencies \
     && rm -Rf /var/cache/apk/* 
@@ -38,4 +39,4 @@ RUN mkdir -p /etc/ansible \
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 
 WORKDIR /etc/init.d
-CMD ["/sbin/init"]
+CMD ["/sbin/openrc-init"]
