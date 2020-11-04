@@ -11,7 +11,7 @@ Alpine container for Ansible playbook and role testing in Molecule.
 The simplest way to run the container is the following command:
 
 ```bash
-docker run --detach --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro rsprta/alpine-ansible
+docker run --detach --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro rsprta/alpine-ansible
 ```
 
 Or in `molecule.yml`:
@@ -23,7 +23,6 @@ platforms:
     command: ""
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    privileged: true
     pre_build_image: true
 ```
 
