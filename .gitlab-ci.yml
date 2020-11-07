@@ -22,43 +22,95 @@ services:
 .build:
   stage: build
   script:
-    - docker buildx build --platform ${PLATFORM} --tag unbound --cache-to type=local,dest=.cache/${PLATFORM} --load .
-    - docker run --rm -d --name unbound unbound
-    - docker stop unbound
+    - docker buildx build --build-arg version=${VERSION} --platform ${PLATFORM} --tag alpine-ansible --cache-to type=local,dest=.cache/${PLATFORM} --load .
+    - docker run --rm -d --name alpine-ansible alpine-ansible
+    - docker stop alpine-ansible
   artifacts:
     paths:
       - .cache
     expire_in: 1 hour
 
-linux/amd64:
+.container-build: &container-build
   extends:
     - .build
     - .docker-setup
+
+# Latest tag
+amd64:latest:
+  <<: *container-build
   variables:
     PLATFORM: linux/amd64
+    VERSION: latest
 
-linux/arm64:
-  extends:
-    - .build
-    - .docker-setup
+arm64:latest:
+  <<: *container-build
   variables:
     PLATFORM: linux/arm64
+    VERSION: latest
 
-linux/arm/v7:
-  extends:
-    - .build
-    - .docker-setup
+arm/v7:latest:
+  <<: *container-build
   variables:
     PLATFORM: linux/arm/v7
+    VERSION: latest
 
-linux/arm/v6:
-  extends:
-    - .build
-    - .docker-setup
+arm/v6:latest:
+  <<: *container-build
   variables:
     PLATFORM: linux/arm/v6
+    VERSION: latest
 
-deploy:
+# 15.2 tag
+amd64:15.2:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/amd64
+    VERSION: "15.2"
+
+arm64:15.2:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/arm64
+    VERSION: "15.2"
+
+arm/v7:15.2:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/arm/v7
+    VERSION: "15.2"
+
+arm/v6:15.2:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/arm/v6
+    VERSION: "15.2"
+
+# 15.1 tag
+amd64:15.1:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/amd64
+    VERSION: "15.1"
+
+arm64:15.1:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/arm64
+    VERSION: "15.1"
+
+arm/v7:15.1:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/arm/v7
+    VERSION: "15.1"
+
+arm/v6:15.1:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/arm/v6
+    VERSION: "15.1"
+
+.deploy: &deploy
   extends:
     - .docker-setup
   stage: deploy
@@ -71,6 +123,21 @@ deploy:
       --cache-from type=local,src=.cache/linux/arm/v6 \
       --label "org.opencontainers.image.created=${BUILD_DATE}" \
       --label "org.opencontainers.image.revision=${VCS_REF}" \
-      --tag ${CI_REGISTRY_IMAGE}:latest \
-      --tag ${DOCKERHUB_REPOSITORY}:latest
+      --tag ${CI_REGISTRY_IMAGE}:${VERSION} \
+      --tag ${DOCKERHUB_REPOSITORY}:${VERSION}
     - docker run -v ${PWD}:/workspace -e DOCKERHUB_USERNAME -e DOCKERHUB_PASSWORD -e DOCKERHUB_REPOSITORY -e README_FILEPATH=/workspace/README.md peterevans/dockerhub-description
+
+deploy:latest:
+  <<: *deploy
+  variables:
+    VERSION: latest
+
+deploy:15.2:
+  <<: *deploy
+  variables:
+    VERSION: "15.2"
+
+deploy:15.1:
+  <<: *deploy
+  variables:
+    VERSION: "15.1"

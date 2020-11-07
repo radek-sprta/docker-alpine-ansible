@@ -1,4 +1,5 @@
-FROM alpine:3
+ARG VERSION=3
+FROM alpine:$VERSION
 
 LABEL maintainer="Radek Sprta <mail@radeksprta.eu>"
 LABEL org.opencontainers.image.authors="Radek Sprta <mail@radeksprta.eu>"
