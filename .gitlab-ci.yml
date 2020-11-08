@@ -22,7 +22,7 @@ services:
 .build:
   stage: build
   script:
-    - docker buildx build --build-arg version=${VERSION} --platform ${PLATFORM} --tag alpine-ansible --cache-to type=local,dest=.cache/${PLATFORM} --load .
+    - docker buildx build --build-arg version=${VERSION} --platform ${PLATFORM} --tag alpine-ansible --cache-to type=local,dest=.cache/${PLATFORM}/${VERSION} --load .
     - docker run --rm -d --name alpine-ansible alpine-ansible
     - docker stop alpine-ansible
   artifacts:
@@ -167,10 +167,10 @@ arm/v6:3.9:
   script:
     - |
       docker buildx build . --push --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
-      --cache-from type=local,src=.cache/linux/amd64 \
-      --cache-from type=local,src=.cache/linux/arm64 \
-      --cache-from type=local,src=.cache/linux/arm/v7 \
-      --cache-from type=local,src=.cache/linux/arm/v6 \
+      --cache-from type=local,src=.cache/linux/amd64/${VERSION} \
+      --cache-from type=local,src=.cache/linux/arm64/${VERSION} \
+      --cache-from type=local,src=.cache/linux/arm/v7/${VERSION} \
+      --cache-from type=local,src=.cache/linux/arm/v6/${VERSION} \
       --label "org.opencontainers.image.created=${BUILD_DATE}" \
       --label "org.opencontainers.image.revision=${VCS_REF}" \
       --tag ${CI_REGISTRY_IMAGE}:${VERSION} \
