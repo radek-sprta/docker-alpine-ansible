@@ -176,6 +176,7 @@ arm/v6:3.9:
       --tag ${CI_REGISTRY_IMAGE}:${VERSION} \
       --tag ${DOCKERHUB_REPOSITORY}:${VERSION}
     - docker run -v ${PWD}:/workspace -e DOCKERHUB_USERNAME -e DOCKERHUB_PASSWORD -e DOCKERHUB_REPOSITORY -e README_FILEPATH=/workspace/README.md peterevans/dockerhub-description
+  retry: 1
 
 deploy:latest:
   <<: *deploy
