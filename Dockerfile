@@ -25,6 +25,7 @@ RUN apk --no-cache add \
 # Install Ansible via pip.
 RUN apk --update add --virtual .build-dependencies \
        build-base \
+       cargo \
        libffi-dev \
        openssl-dev \
        py3-pip \
