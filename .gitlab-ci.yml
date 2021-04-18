@@ -43,47 +43,11 @@ amd64:latest:
     PLATFORM: linux/amd64
     VERSION: latest
 
-arm64:latest:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm64
-    VERSION: latest
-
-arm/v7:latest:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v7
-    VERSION: latest
-
-arm/v6:latest:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v6
-    VERSION: latest
-
 # 3.12 tag
 amd64:3.12:
   <<: *container-build
   variables:
     PLATFORM: linux/amd64
-    VERSION: "3.12"
-
-arm64:3.12:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm64
-    VERSION: "3.12"
-
-arm/v7:3.12:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v7
-    VERSION: "3.12"
-
-arm/v6:3.12:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v6
     VERSION: "3.12"
 
 # 3.11 tag
@@ -93,47 +57,11 @@ amd64:3.11:
     PLATFORM: linux/amd64
     VERSION: "3.11"
 
-arm64:3.11:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm64
-    VERSION: "3.11"
-
-arm/v7:3.11:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v7
-    VERSION: "3.11"
-
-arm/v6:3.11:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v6
-    VERSION: "3.11"
-
 # 3.10 tag
 amd64:3.10:
   <<: *container-build
   variables:
     PLATFORM: linux/amd64
-    VERSION: "3.10"
-
-arm64:3.10:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm64
-    VERSION: "3.10"
-
-arm/v7:3.10:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v7
-    VERSION: "3.10"
-
-arm/v6:3.10:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v6
     VERSION: "3.10"
 
 # 3.9 tag
@@ -143,35 +71,14 @@ amd64:3.9:
     PLATFORM: linux/amd64
     VERSION: "3.9"
 
-arm64:3.9:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm64
-    VERSION: "3.9"
-
-arm/v7:3.9:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v7
-    VERSION: "3.9"
-
-arm/v6:3.9:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/arm/v6
-    VERSION: "3.9"
-
 .deploy: &deploy
   extends:
     - .docker-setup
   stage: deploy
   script:
     - |
-      docker buildx build . --push --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
+      docker buildx build . --push --platform linux/amd64 \
       --cache-from type=local,src=.cache/linux/amd64/${VERSION} \
-      --cache-from type=local,src=.cache/linux/arm64/${VERSION} \
-      --cache-from type=local,src=.cache/linux/arm/v7/${VERSION} \
-      --cache-from type=local,src=.cache/linux/arm/v6/${VERSION} \
       --label "org.opencontainers.image.created=${BUILD_DATE}" \
       --label "org.opencontainers.image.revision=${VCS_REF}" \
       --tag ${CI_REGISTRY_IMAGE}:${VERSION} \
