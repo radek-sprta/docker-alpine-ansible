@@ -48,18 +48,21 @@ arm64:latest:
   variables:
     PLATFORM: linux/arm64
     VERSION: latest
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v7:latest:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v7
     VERSION: latest
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v6:latest:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v6
     VERSION: latest
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 # 3.12 tag
 amd64:3.12:
@@ -73,18 +76,21 @@ arm64:3.12:
   variables:
     PLATFORM: linux/arm64
     VERSION: "3.12"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v7:3.12:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v7
     VERSION: "3.12"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v6:3.12:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v6
     VERSION: "3.12"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 # 3.11 tag
 amd64:3.11:
@@ -98,18 +104,21 @@ arm64:3.11:
   variables:
     PLATFORM: linux/arm64
     VERSION: "3.11"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v7:3.11:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v7
     VERSION: "3.11"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v6:3.11:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v6
     VERSION: "3.11"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 # 3.10 tag
 amd64:3.10:
@@ -123,18 +132,21 @@ arm64:3.10:
   variables:
     PLATFORM: linux/arm64
     VERSION: "3.10"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v7:3.10:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v7
     VERSION: "3.10"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v6:3.10:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v6
     VERSION: "3.10"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 # 3.9 tag
 amd64:3.9:
@@ -148,18 +160,21 @@ arm64:3.9:
   variables:
     PLATFORM: linux/arm64
     VERSION: "3.9"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v7:3.9:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v7
     VERSION: "3.9"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 arm/v6:3.9:
   <<: *container-build
   variables:
     PLATFORM: linux/arm/v6
     VERSION: "3.9"
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
 
 .deploy: &deploy
   extends:
