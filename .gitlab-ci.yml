@@ -57,20 +57,6 @@ amd64:3.11:
     PLATFORM: linux/amd64
     VERSION: "3.11"
 
-# 3.10 tag
-amd64:3.10:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/amd64
-    VERSION: "3.10"
-
-# 3.9 tag
-amd64:3.9:
-  <<: *container-build
-  variables:
-    PLATFORM: linux/amd64
-    VERSION: "3.9"
-
 .deploy: &deploy
   extends:
     - .docker-setup
@@ -100,13 +86,3 @@ deploy:3.11:
   <<: *deploy
   variables:
     VERSION: "3.11"
-
-deploy:3.10:
-  <<: *deploy
-  variables:
-    VERSION: "3.10"
-
-deploy:3.9:
-  <<: *deploy
-  variables:
-    VERSION: "3.9"
