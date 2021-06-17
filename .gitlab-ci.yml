@@ -43,6 +43,20 @@ amd64:latest:
     PLATFORM: linux/amd64
     VERSION: latest
 
+# 3.14 tag
+amd64:3.12:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/amd64
+    VERSION: "3.14"
+
+# 3.13 tag
+amd64:3.12:
+  <<: *container-build
+  variables:
+    PLATFORM: linux/amd64
+    VERSION: "3.13"
+
 # 3.12 tag
 amd64:3.12:
   <<: *container-build
@@ -76,6 +90,16 @@ deploy:latest:
   <<: *deploy
   variables:
     VERSION: latest
+
+deploy:3.14:
+  <<: *deploy
+  variables:
+    VERSION: "3.14"
+
+deploy:3.13:
+  <<: *deploy
+  variables:
+    VERSION: "3.13"
 
 deploy:3.12:
   <<: *deploy
