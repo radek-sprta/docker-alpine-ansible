@@ -44,14 +44,14 @@ amd64:latest:
     VERSION: latest
 
 # 3.14 tag
-amd64:3.12:
+amd64:3.14:
   <<: *container-build
   variables:
     PLATFORM: linux/amd64
     VERSION: "3.14"
 
 # 3.13 tag
-amd64:3.12:
+amd64:3.13:
   <<: *container-build
   variables:
     PLATFORM: linux/amd64
