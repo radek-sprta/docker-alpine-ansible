@@ -1,4 +1,4 @@
-# Alpine Ansible [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/rsprta/alpine-ansible)](https://hub.docker.com/r/rsprta/alpine-ansible) [![Docker Pulls](https://img.shields.io/docker/pulls/rsprta/alpine-ansible)](https://hub.docker.com/r/rsprta/alpine-ansible) [![Pipeline status](https://gitlab.com/radek-sprta/docker-alpine-ansible/badges/master/pipeline.svg)](https://gitlab.com/radek-sprta/docker-alpine-ansible/commits/master)
+# rsprta/alpine-ansible [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/rsprta/alpine-ansible)](https://hub.docker.com/r/rsprta/alpine-ansible) [![Docker Pulls](https://img.shields.io/docker/pulls/rsprta/alpine-ansible)](https://hub.docker.com/r/rsprta/alpine-ansible) [![Pipeline status](https://gitlab.com/radek-sprta/docker-alpine-ansible/badges/master/pipeline.svg)](https://gitlab.com/radek-sprta/docker-alpine-ansible/commits/master)
 
 ## Quick reference
 - **Maintained by**: [Radek Sprta](https://gitlab.com/radek-sprta)
