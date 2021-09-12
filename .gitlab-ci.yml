@@ -22,6 +22,8 @@ services:
 .build:
   stage: build
   script:
+    # Populate image cache to speed up builds
+    - docker pull ${DOCKERHUB_REPOSITORY}:${VERSION} || true
     - docker buildx build --build-arg version=${VERSION} --platform ${PLATFORM} --tag alpine-ansible --cache-to type=local,dest=.cache/${PLATFORM}/${VERSION} --load .
     - docker run --rm -d --name alpine-ansible alpine-ansible
     - docker stop alpine-ansible
