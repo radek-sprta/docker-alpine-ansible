@@ -4,7 +4,7 @@ stages:
 
 services:
   - name: docker:dind
-    command: ["--experimental --mtu=1440"]
+    command: ["--experimental"]
 
 .docker-setup:
   image: docker:stable-git
