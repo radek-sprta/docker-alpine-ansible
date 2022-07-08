@@ -50,4 +50,4 @@ RUN mkdir -p /etc/ansible \
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 
 WORKDIR /etc/init.d
-CMD ["/sbin/openrc-init"]
+CMD ["/sbin/init"]
