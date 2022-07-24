@@ -35,7 +35,7 @@ build:
   script:
     - just build "${VERSION}" "${PLATFORM}"
     - just run
-    - docker stop selfoss
+    - docker stop alpine-ansible
     # Upload internally for testing
     - >
       just
