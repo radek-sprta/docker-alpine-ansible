@@ -67,12 +67,13 @@ clean:cache:
     - .matrix
   stage: clean
   script:
-    - |
-      docker run \
-        -e ACCESS_TOKEN=$CI_JOB_TOKEN \
-        -e PROJECT_ID=$CI_PROJECT_ID \
-        -e IMAGE_TAG=$VERSION \
-        -e IMAGE_LOCATION=$CI_REGISTRY_IMAGE \
+    - >
+      docker run
+        -e PROJECT_ID=$CI_PROJECT_ID
+        -e IMAGE_TAG=$VERSION
+        -e IMAGE_LOCATION=$CI_REGISTRY_IMAGE
+        -e USER=$CI_REGISTRY_USER
+        -e PASSWORD=$CI_REGISTRY_PASSWORD
         rsprta/gitlab-registry-cleaner:latest
   only:
     - branches
