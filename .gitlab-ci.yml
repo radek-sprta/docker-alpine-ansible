@@ -69,12 +69,12 @@ clean:cache:
   script:
     - >
       docker run
-        -e PROJECT_ID=$CI_PROJECT_ID
-        -e IMAGE_TAG=$VERSION
-        -e IMAGE_LOCATION=$CI_REGISTRY_IMAGE
-        -e USER=$CI_REGISTRY_USER
-        -e PASSWORD=$CI_REGISTRY_PASSWORD
-        rsprta/gitlab-registry-cleaner:latest
+      -e PROJECT_ID=$CI_PROJECT_ID
+      -e IMAGE_TAG=$VERSION
+      -e IMAGE_LOCATION=$CI_REGISTRY_IMAGE
+      -e USER=$CI_REGISTRY_USER
+      -e PASSWORD=$CI_REGISTRY_PASSWORD
+      rsprta/gitlab-registry-cleaner:latest
   only:
     - branches
   except:
