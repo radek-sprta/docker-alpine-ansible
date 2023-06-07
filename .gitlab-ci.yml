@@ -73,7 +73,7 @@ clean:cache:
         -e PROJECT_ID=$CI_PROJECT_ID \
         -e IMAGE_TAG=$VERSION \
         -e IMAGE_LOCATION=$GITLAB_REGISTRY/$CI_PROJECT_PATH/docker-alpine-ansible \
-        devsgroup/gitlab-registry-cleaner:latest
+        rsprta/gitlab-registry-cleaner:latest
   only:
     - branches
   except:
