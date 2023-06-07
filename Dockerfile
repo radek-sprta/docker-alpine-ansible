@@ -13,7 +13,8 @@ LABEL org.opencontainers.image.url="https://gitlab.com/radek-sprta/docker-alpine
 ENV pip_packages "ansible cryptography"
 
 # Install dependencies.
-RUN apk --no-cache add \
+RUN apk upgrade --no-cache \ 
+    && apk --no-cache add \
        gzip \
        openrc \
        python3 \
