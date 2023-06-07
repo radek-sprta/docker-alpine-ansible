@@ -72,7 +72,7 @@ clean:cache:
         -e ACCESS_TOKEN=$GITLAB_ACCESS_TOKEN \
         -e PROJECT_ID=$CI_PROJECT_ID \
         -e IMAGE_TAG=$VERSION \
-        -e IMAGE_LOCATION=$CI_REGISTRY/$CI_REGISTRY_IMAGE \
+        -e IMAGE_LOCATION=$CI_REGISTRY_IMAGE \
         rsprta/gitlab-registry-cleaner:latest
   only:
     - branches
