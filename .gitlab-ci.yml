@@ -80,3 +80,16 @@ clean:cache:
   except:
     - master
 
+clean:cache2:
+  extends:
+    - .matrix
+  stage: clean
+  script:
+    - apk --no-cache curl jq
+    - export SCOPE="repository:${CI_REGISTRY_IMAGE}:delete"
+    - export TOKEN=`curl --request GET --user "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" "${CI_SERVER_URL}/jwt/auth?service=container_registry&scope=${SCOPE}" |jq -r .token`
+    - curl --request DELETE --header "Authorization: Bearer ${TOKEN}" --header "Accept: application/vnd.docker.distribution.manifest.v2+json" "https://${CI_REGISTRY}/v2/${CI_REGISTRY_IMAGE}/tags/reference/${VERSION}"
+  only:
+    - branches
+  except:
+    - master
