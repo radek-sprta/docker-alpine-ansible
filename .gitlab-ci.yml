@@ -1,4 +1,5 @@
 stages:
+  - clean
   - build
   - test
   - deploy
@@ -60,3 +61,19 @@ deploy:
   stage: deploy
   script:
     - just upload "${VERSION}" "${PLATFORMS}"
+
+clean:cache:
+  stage: clean
+  script:
+    - |
+      docker run \
+        -e ACCESS_TOKEN=$GITLAB_ACCESS_TOKEN \
+        -e PROJECT_ID=$CI_PROJECT_ID \
+        -e IMAGE_TAG=$CI_BUILD_REF_NAME \
+        -e IMAGE_LOCATION=$GITLAB_REGISTRY/$CI_PROJECT_PATH/$CI_REGISTRY_IMAGE \
+        devsgroup/gitlab-registry-cleaner:latest
+  only:
+    - branches
+  except:
+    - master
+
