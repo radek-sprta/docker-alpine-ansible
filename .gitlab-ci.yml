@@ -88,8 +88,7 @@ clean:cache2:
     - apk add --no-cache curl jq
     - >
       SCOPE="repository:${CI_REGISTRY_IMAGE}:delete"
-      TOKEN=`curl --request GET --user "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" "${CI_SERVER_URL}/jwt/auth?service=container_registry&scope=${SCOPE}" |jq -r .token`
-      echo $TOKEN
+      TOKEN=`curl --request GET --user "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" "${CI_SERVER_URL}/jwt/auth?account=${CI_REGISTRY_USER}&service=container_registry&scope=${SCOPE}" |jq -r .token`
       curl --request DELETE --header "Authorization: Bearer ${TOKEN}" --header "Accept: application/vnd.docker.distribution.manifest.v2+json" "https://${CI_REGISTRY}/v2/${CI_REGISTRY_IMAGE}/tags/reference/${VERSION}"
   only:
     - branches
