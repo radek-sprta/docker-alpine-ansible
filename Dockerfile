@@ -10,11 +10,10 @@ LABEL org.opencontainers.image.source="https://gitlab.com/radek-sprta/docker-alp
 LABEL org.opencontainers.image.title="rsprta/alpine-ansible"
 LABEL org.opencontainers.image.url="https://gitlab.com/radek-sprta/docker-alpine-ansible"
 
-ENV pip_packages "ansible cryptography"
-
 # Install dependencies.
 RUN apk upgrade --no-cache \ 
     && apk --no-cache add \
+       ansible \
        gzip \
        openrc \
        python3 \
@@ -22,18 +21,6 @@ RUN apk upgrade --no-cache \
        tar \
        wget \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man
-
-# Install Ansible via pip.
-RUN apk --update add --virtual .build-dependencies \
-       build-base \
-       cargo \
-       libffi-dev \
-       openssl-dev \
-       py3-pip \
-       python3-dev \
-    && pip3 install $pip_packages \
-    && apk del .build-dependencies \
-    && rm -Rf /var/cache/apk/*
 
 # Remove useless services
 RUN rm -f \
